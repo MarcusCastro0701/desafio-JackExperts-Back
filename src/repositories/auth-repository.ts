@@ -1,5 +1,5 @@
 import { prisma } from "../config"
-import { userBody } from "../schemas/auth-schema"
+import { userBody } from "../schemas/user-schema"
 
 
 async function findUniqueByEmail(email: string){

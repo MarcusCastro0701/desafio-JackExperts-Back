@@ -1,5 +1,5 @@
 import authRepository from "../repositories/auth-repository"
-import { userBody } from "../schemas/auth-schema"
+import { userBody } from "../schemas/user-schema"
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 

@@ -1,15 +1,15 @@
-import { createEnrollment } from '../controllers/enrollment-controller'
+import { createtask } from '../controllers/task-controller'
 import { authenticateToken } from '../middlewares/authentication-middlerare'
 import { Router } from 'express'
 
-const enrollmentRouter = Router()
+const taskRouter = Router()
 
-enrollmentRouter
+taskRouter
     .all("/*", authenticateToken)
-    .post("", createEnrollment)
+    .post("", createtask)
     // .get("", )
     // .put("", )
     // .delete("", )
 
 
-export { enrollmentRouter }
+export { taskRouter }

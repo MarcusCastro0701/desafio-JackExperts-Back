@@ -36,10 +36,6 @@ export async function authenticateAdminToken(req: AuthenticatedAdminRequest, res
         id: session.userId
       }
     })
-
-    if (userData?.role !== "ADMIN"){
-      return res.sendStatus(httpStatus.UNAUTHORIZED);
-    }
    
     req.adminId = session.userId
 

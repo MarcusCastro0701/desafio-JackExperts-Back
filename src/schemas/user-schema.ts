@@ -1,5 +1,5 @@
 import joi from "joi";
-import { enrollmentBody } from "./enrollment-schema";
+import { taskBody } from "./task-schema";
 
 export type userBody = {
     id: number,
@@ -8,7 +8,7 @@ export type userBody = {
     password: string,
 }
 
-export type fullUserBody = userBody & enrollmentBody
+export type fullUserBody = userBody & taskBody
 
 export enum UserRole {
     USER = 'USER',

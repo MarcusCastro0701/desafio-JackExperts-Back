@@ -1,7 +1,7 @@
 import { AuthenticatedAdminRequest } from "../middlewares/authenticationAdmin-middlerare";
-import { UserRole, userBody, authSCHEMA, fullUserBody } from "../schemas/auth-schema";
+import { UserRole, userBody, authSCHEMA, fullUserBody } from "../schemas/user-schema";
 import authService from "../services/auth-service";
-import enrollmentService from "../services/enrollment-service";
+import taskService from "../services/task-service";
 import bcrypt from 'bcrypt'
 import { Request, Response } from "express";
 import httpStatus from "http-status";
@@ -15,7 +15,7 @@ export async function createUser(req: Request, res: Response){
             return res.sendStatus(httpStatus.BAD_REQUEST)
         }
 
-        const {name, email, password, cpf, birthday, phone, address, cep, city, neighborhood, uf}: Omit<fullUserBody, "id"> = req.body
+        const {name, password, email}: Omit<fullUserBody, "id"> = req.body
 
 
         const hasEmail = await authService.getUniqueByEmail(email)
@@ -24,14 +24,13 @@ export async function createUser(req: Request, res: Response){
             return res.sendStatus(httpStatus.CONFLICT)
         }
 
-        
         const userData = await authService.createUser({name, email, password})
 
         const userId = userData.id
 
-        const hasEnrollment = await enrollmentService.getEnrollmentByUserId(userId)
+        const hastask = await taskService.gettaskByUserId(userId)
 
-        if (hasEnrollment) {
+        if (hastask) {
             res.sendStatus(httpStatus.CONFLICT)
             return
         }
