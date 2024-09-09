@@ -24,17 +24,7 @@ export async function createUser(req: Request, res: Response){
             return res.sendStatus(httpStatus.CONFLICT)
         }
 
-        const userData = await authService.createUser({name, email, password})
-
-        const userId = userData.id
-
-        const hastask = await taskService.gettasksByUserId(userId)
-
-        if (hastask) {
-            res.sendStatus(httpStatus.CONFLICT)
-            return
-        }
-        
+        await authService.createUser({name, email, password})
 
         return res.sendStatus(httpStatus.CREATED)        
 

@@ -1,6 +1,6 @@
-import { loadEnv } from "./config";
+import { connectDb, disconnectDB, loadEnv } from '@/config';
 import cors from "cors";
-import express from "express";
+import express, { Express } from "express";
 
 import "express-async-errors";
 
@@ -8,7 +8,6 @@ import { authRouter } from "./routers/auth-router";
 import { taskRouter } from "./routers/task-router";
 
 loadEnv();
-
 
 const app = express();
 app
@@ -18,3 +17,12 @@ app
   .use("/auth", authRouter)
   .use("/task", taskRouter)
 export default app;
+
+export function init(): Promise<Express> {
+  connectDb();
+  return Promise.resolve(app);
+}
+
+export async function close(): Promise<void> {
+  await disconnectDB();
+}
