@@ -8,27 +8,25 @@ export type taskBody = {
     isDone: boolean,
 }
 
-const create = joi.object<Omit<taskBody, "id" | "userId">>({
+const create = joi.object<Omit<taskBody, "id" | "userId" | "isDone">>({
     name: joi.string().required().min(4),
     description: joi.string().required().min(10),
-    isDone: joi.boolean().required(),
 });
 
-const update = joi.object<Omit<taskBody, "userId">>({
+const updateNewData = joi.object<Omit<taskBody, "id" | "userId" | "isDone" >>({
     name: joi.string().required().min(4),
     description: joi.string().required().min(10),
-    isDone: joi.boolean().required(),
     
 });
 
-const deleteById = joi.object<{id: number}>({
+const updateChecked = joi.object<{id: number}>({
     id: joi.number().min(0).integer().required()
 });
 
 const taskSCHEMA = {
     create,
-    update,
-    deleteById
+    updateNewData,
+    updateChecked
 }
 
 export {taskSCHEMA}

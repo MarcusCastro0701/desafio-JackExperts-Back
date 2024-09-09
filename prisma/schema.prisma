@@ -30,7 +30,7 @@ model Session {
 
 model Task {
   id            Int       @id @default(autoincrement())
-  userId        Int       @unique
+  userId        Int       
   name          String    @unique
   description   String    
   isDone        Boolean   @default(false)

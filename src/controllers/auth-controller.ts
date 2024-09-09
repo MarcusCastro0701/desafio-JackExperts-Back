@@ -28,7 +28,7 @@ export async function createUser(req: Request, res: Response){
 
         const userId = userData.id
 
-        const hastask = await taskService.gettaskByUserId(userId)
+        const hastask = await taskService.gettasksByUserId(userId)
 
         if (hastask) {
             res.sendStatus(httpStatus.CONFLICT)
@@ -68,7 +68,7 @@ export async function createSession(req: Request, res: Response){
 
         const { token } = await authService.createSession(hasUser.id)
 
-        return res.send({token, email, name: hasUser.name}).status(httpStatus.CREATED)
+        return res.send({userId: hasUser.id, token, email, name: hasUser.name,}).status(httpStatus.CREATED)
         
 
     } catch (error) {

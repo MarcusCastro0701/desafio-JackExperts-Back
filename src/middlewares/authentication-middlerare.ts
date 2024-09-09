@@ -5,6 +5,8 @@ import * as jwt from "jsonwebtoken";
 import { prisma } from "../config";
 
 export async function authenticateToken(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+
+
   const authHeader = req.header("Authorization");
 
   if (!authHeader){
@@ -19,7 +21,6 @@ export async function authenticateToken(req: AuthenticatedRequest, res: Response
 
   try {
     //const { userId } = jwt.verify(token, process.env.JWT_SECRET) as RequestWithUser;
-
     const session = await prisma.session.findFirst({
       where: {
         token,
