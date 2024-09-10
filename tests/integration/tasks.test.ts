@@ -14,6 +14,11 @@ beforeAll(async () => {
   await cleanDb();
 });
 
+afterAll(async () => {
+  await init();
+  await cleanDb();
+});
+
 const server = supertest(app);
 
 describe('GET /task', () => {
