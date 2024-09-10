@@ -19,7 +19,6 @@ export async function authenticateAdminToken(req: AuthenticatedAdminRequest, res
   }
 
   try {
-    //const { userAdminId } = jwt.verify(token, process.env.JWT_SECRET) as RequestWithUserAdmin;
 
     const session = await prisma.session.findUnique({
       where: {

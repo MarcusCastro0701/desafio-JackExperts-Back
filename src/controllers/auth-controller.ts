@@ -7,7 +7,12 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 
 export async function createUser(req: Request, res: Response){
-    try {    
+    try {  
+        
+        if(!req.body){
+            return res.sendStatus(httpStatus.BAD_REQUEST)
+        }
+
         const isValid = authSCHEMA.createFullUser.validate(req.body, {abortEarly: false})
 
         if(isValid.error){
@@ -24,9 +29,16 @@ export async function createUser(req: Request, res: Response){
             return res.sendStatus(httpStatus.CONFLICT)
         }
 
-        await authService.createUser({name, email, password})
+        const user = await authService.createUser({name, email, password})
 
-        return res.sendStatus(httpStatus.CREATED)        
+        console.log(user)
+
+        const userBody = {
+            id: user.id,
+            name: user.name,
+        }
+
+        return res.status(httpStatus.CREATED).send(userBody);       
 
     } catch (error) {
         console.log(error)
@@ -34,7 +46,12 @@ export async function createUser(req: Request, res: Response){
     }
 }
 export async function createSession(req: Request, res: Response){
-    try {        
+    try { 
+        
+        if(!req.body){
+            return res.sendStatus(httpStatus.BAD_REQUEST)
+        }
+
         const isValid = authSCHEMA.createSession.validate(req.body, {abortEarly: false})
 
         if(isValid.error){

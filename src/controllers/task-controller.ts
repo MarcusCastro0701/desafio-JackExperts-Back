@@ -6,7 +6,7 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 
 export async function createtask(req: AuthenticatedRequest, res: Response){
-
+    console.log(req.body, 'BODE AQUI')
     try {        
         const isValid = taskSCHEMA.create.validate(req.body, {abortEarly: false})
 

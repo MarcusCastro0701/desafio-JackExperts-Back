@@ -6,8 +6,8 @@ const taskRouter = Router()
 
 taskRouter
     .all("/*", authenticateToken)
-    .post("/:userId", createtask)
-    .get("/:userId", showAllTasks)
+    .post("/", createtask)
+    .get("/", showAllTasks)
     .put("/check/:taskId", updateChecked)
     .put("/data/:taskId", setNewTaskData)
     .delete("/:taskId", removeTaskById)
